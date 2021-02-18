@@ -1,6 +1,0 @@
-引入的规范
-<?xml version='1.0' encoding='utf-8' ?>
-1、填写xml文档的根元素
-<students xmlns:xsi=""
-xis:schemaLocation="命名空间  xsd文件"
-xmlns:a="命名空间">
