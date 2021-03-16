@@ -44,3 +44,7 @@ class 懒汉式 {
         return s;
     }
 }
+
+class Single {
+
+}

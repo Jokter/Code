@@ -8,6 +8,7 @@ public class 快速排序 {
             System.out.print(i+" ");
         }
     }
+
     public static void quickSort(int[] arr,int low,int high){
         if (low < high) {
             int mid = sort(arr, low, high);
@@ -15,6 +16,7 @@ public class 快速排序 {
             quickSort(arr, mid + 1, high);
         }
     }
+
     public static int sort(int[] arr,int low,int high){
         int temp = arr[low];
         while (low < high) {
@@ -30,4 +32,5 @@ public class 快速排序 {
         arr[low] = temp;
         return low;
     }
+
 }
