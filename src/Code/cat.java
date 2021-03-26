@@ -1,8 +1,16 @@
 package Code;
 
-public class cat extends Animal {
-    @Override
-    public void run() {
-        System.out.println(2);
+public class cat {
+    private String name;
+
+    public cat() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

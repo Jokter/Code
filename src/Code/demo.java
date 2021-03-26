@@ -1,18 +1,34 @@
 package Code;
 
+
+import java.lang.reflect.Field;
+import java.util.HashMap;
+
 /**
  * @author demonwangyu_i
  * @creator 2021/1/11 下午10:06
  */
 public class demo {
-    public static void main(String[] args) {
-        int[] arr = {5, 1, 3, 9, 7, 2, 6, 8, 4};
-        insert(arr);
-        for (int number:arr) {
-            System.out.print(number+" ");
-        }
-        System.out.println();
-        print(5);
+    public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
+//        int[] arr = {5, 1, 3, 9, 7, 2, 6, 8, 4};
+//        insert(arr);
+//        for (int number:arr) {
+//            System.out.print(number+" ");
+//        }
+//        System.out.println();
+//        print(5);
+
+
+        cat cat = new cat();
+        Field name = cat.getClass().getDeclaredField("name");
+        name.setAccessible(true);
+        name.set(cat, "hello-kit");
+        System.out.println(cat.getName()); //hello-kit
+
+        HashMap<Object, Object> hashMap = new HashMap<>(7);
+        hashMap.put(1,2);
+        System.out.println(hashMap.size());
+
     }
 
     //冒泡

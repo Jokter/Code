@@ -1,6 +1,4 @@
 package Code.多线程;
-
-import java.util.*;
 public class printThread {
     static volatile int result = 0;
     static volatile int flag = 0;
