@@ -24,9 +24,9 @@ public class 括号生成 {
             return;
         }
         chs[index] = '(';
-        track(chs, index+1);
+        track(chs, index + 1);
         chs[index] = ')';
-        track(chs, index+1);
+        track(chs, index + 1);
     }
 
     public static boolean isValid(char[] chs) {
