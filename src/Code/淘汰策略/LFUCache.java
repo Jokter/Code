@@ -41,6 +41,7 @@ public class LFUCache {
     }
 
     public void put(int key, int value) {
+        if (this.cap <= 0) return;
         if (keyToVal.containsKey(key)) {
             keyToVal.put(key, value);
             increaseFre(key);
