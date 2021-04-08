@@ -6,7 +6,7 @@ import java.util.Queue;
 public class ProducerAndConsumer {
     private final int MAX_LEN = 10;
     private Queue<Integer> queue = new LinkedList<Integer>();
-    class Producer extends Thread {
+    class Producer implements Runnable {
         @Override
         public void run() {
             producer();
@@ -35,7 +35,7 @@ public class ProducerAndConsumer {
             }
         }
     }
-    class Consumer extends Thread {
+    class Consumer implements Runnable {
         @Override
         public void run() {
             consumer();
@@ -66,9 +66,9 @@ public class ProducerAndConsumer {
     }
     public static void main(String[] args) {
         ProducerAndConsumer pc = new ProducerAndConsumer();
-        Producer producer1 = pc.new Producer();
-        Producer producer2 = pc.new Producer();
-        Consumer consumer = pc.new Consumer();
+        Thread producer1 = new Thread(pc.new Producer());
+        Thread producer2 = new Thread(pc.new Producer());
+        Thread consumer = new Thread(pc.new Consumer());
         producer1.start();
         producer2.start();
         consumer.start();

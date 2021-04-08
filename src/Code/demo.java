@@ -1,8 +1,5 @@
 package Code;
-
-
-import java.lang.reflect.Field;
-import java.util.HashMap;
+import java.util.Arrays;
 
 /**
  * @author demonwangyu_i
@@ -10,19 +7,59 @@ import java.util.HashMap;
  */
 public class demo {
     public static void main(String[] args) {
-        System.out.println(reverseWords("a good   example"));
+        int[] ans = new int[]{5, 1, 3, 9, 7, 2, 6, 8, 4};
+        System.out.println(Arrays.toString(sortArray(ans)));
     }
 
-    public static String reverseWords(String s) {
-        String str = s.trim();
-        String[] strArr = str.split(" ");
-        StringBuilder sb = new StringBuilder();
-        for (int i = strArr.length - 1; i >= 0; i--) {
-            if (!strArr[i].equals("")) {
-                sb.append(strArr[i].trim() + " ");
-            }
+    public static int[] sortArray(int[] ans) {
+        //创建+1数组
+        int len = ans.length;
+        int[] res = new int[len + 1];
+
+        for (int i = 0; i < len; i++) {
+            res[i + 1] = ans[i];
         }
-        return sb.toString().trim();
+
+        //构建堆
+        for (int i = len/2; i >= 1; i--) {
+            sink(res, i, len);
+        }
+
+        //排序
+        int k = len;
+        while (k > 1) {
+            swap(res, 1, k--);
+            sink(res, 1, k);
+        }
+
+        //返回
+        for (int i = 0; i < len; i++) {
+            ans[i] = res[i + 1];
+        }
+        return ans;
     }
+
+    private static void sink(int[] ans, int k, int end) {
+        while (2 * k <= end) {
+            int j = 2 * k;
+            if (j + 1 <= end && ans[j] < ans[j+1]) {
+                j++;
+            }
+            if (ans[k] < ans[j]) {
+                swap(ans, k, j);
+            } else {
+                break;
+            }
+            k = j;
+        }
+    }
+
+    private static void swap(int[] ans, int i, int j) {
+        int temp = ans[i];
+        ans[i] = ans[j];
+        ans[j] = temp;
+    }
+
+
 
 }

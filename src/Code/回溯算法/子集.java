@@ -27,11 +27,11 @@ public class 子集 {
             return;
         }
         cur.add(nums[index]);
-        helper(cur,nums,index+1);
-        cur.remove(cur.size()-1);
-        while(index+1<nums.length&&nums[index]==nums[index+1]){
+        helper(cur, nums, index+1);
+        cur.remove(cur.size() - 1);
+        while(index + 1 < nums.length && nums[index] == nums[index+1]){
             index++;
         }
-        helper(cur,nums,index+1);
+        helper(cur, nums, index+1);
     }
 }
