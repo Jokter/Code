@@ -25,7 +25,7 @@ public class 八皇后 {
     public static void track(char[][] arr, int row) {
         if (arr.length == row) {
             ArrayList<String> list = new ArrayList<>();
-            for (int i = 0; i< arr.length; i++) {
+            for (int i = 0; i < arr.length; i++) {
                 list.add(new String(arr[i]));
             }
             res.add(list);

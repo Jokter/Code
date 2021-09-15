@@ -13,9 +13,13 @@ public class LRUCache {
         if (!cache.containsKey(key)) {
             return -1;
         }
+
+        int val = cache.get(key);
+
         // 将 key 变为最近使用
-        makeRecently(key);
-        return cache.get(key);
+        makeRecently(key, val);
+
+        return val;
     }
 
     public void put(int key, int val) {
@@ -23,7 +27,7 @@ public class LRUCache {
             // 修改 key 的值
             cache.put(key, val);
             // 将 key 变为最近使用
-            makeRecently(key);
+            makeRecently(key, val);
             return;
         }
 
@@ -36,8 +40,7 @@ public class LRUCache {
         cache.put(key, val);
     }
 
-    private void makeRecently(int key) {
-        int val = cache.get(key);
+    private void makeRecently(int key, int val) {
         // 删除 key，重新插入到队尾
         cache.remove(key);
         cache.put(key, val);

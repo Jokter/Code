@@ -1,73 +1,39 @@
 package Code;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Random;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author demonwangyu_i
  * @creator 2021/1/11 下午10:06
  */
 public class demo {
-
+    static List<List<Integer>> res = new ArrayList<>();
     public static void main(String[] args) {
-        int[] ans = new int[]{5, 1, 3, 9, 7, 2, 6, 8, 4};
-//        System.out.println(Arrays.toString(sortArray(ans)));
-        Random random = new Random();
-        System.out.println(random.nextInt(10));
+        int[] ans = new int[]{1, 2, 2};
+        subsetsWithDup(ans);
+        System.out.println(res);
+
     }
 
-    private static int[] sortArray(int[] ans) {
-        //新建替换数组
-        int len = ans.length;
-        int[] res = new int[len + 1];
-        for (int i = 0; i < len; i++) {
-            res[i + 1] = ans[i];
-        }
 
-        //建堆
-        for (int i = len/2; i >= 1; i--) {
-            sink(res, i, len);
-        }
-
-        //排序
-        int k = len;
-        while (k > 1) {
-            swap(res, 1, k);
-            k--;
-            sink(res, 1, k);
-        }
-
-        //换为原数组
-        for (int i = 0; i < len; i++) {
-            ans[i] = res[i + 1];
-        }
-        return ans;
+    public static List<List<Integer>> subsetsWithDup(int[] nums) {
+        Arrays.sort(nums);
+        List<Integer> list = new ArrayList<>();
+        track(list, nums, 0);
+        return res;
     }
-
-    private static void sink (int[] ans, int k, int end) {
-        while (2 * k <= end) {
-            //左子节点
-            int j = 2 * k;
-            //左右节点找大的
-            if (j + 1 <= end && ans[j + 1] > ans[j]) {
-                j++;
-            }
-            //交换操作，父节点下沉，与最大的孩子节点交换
-            if (ans[j] > ans[k]) {
-                swap(ans, j, k);
-            } else {
-                break;
-            }
-            //继续下沉
-            k = j;
+    private static void track(List<Integer> list , int[] nums, int index) {
+        if(index == nums.length) {
+            res.add(new ArrayList<>(list));
+            return;
         }
-    }
-
-    private static void swap(int[] ans, int i, int j) {
-        int temp = ans[i];
-        ans[i] = ans[j];
-        ans[j] = temp;
+        list.add(nums[index]);
+        track(list, nums, index + 1);
+        list.remove(list.size() - 1);
+        while (index + 1 < nums.length && nums[index] == nums[index + 1]) {
+            index++;
+        }
+        track(list, nums, index + 1);
     }
 }
