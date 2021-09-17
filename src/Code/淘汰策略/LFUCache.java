@@ -25,21 +25,6 @@ public class LFUCache {
         return keyToVal.get(key);
     }
 
-    private void increaseFre(int key) {
-        int oldFre = keyToFre.get(key);
-        keyToFre.put(key, oldFre + 1);
-        freToKey.get(oldFre).remove(key);
-        freToKey.putIfAbsent(oldFre + 1, new LinkedHashSet<Integer>());
-        freToKey.get(oldFre + 1).add(key);
-
-        if (freToKey.get(oldFre).isEmpty()) {
-            freToKey.remove(oldFre);
-            if (oldFre == this.minFre) {
-                minFre++;
-            }
-        }
-    }
-
     public void put(int key, int value) {
         if (this.cap <= 0) return;
         if (keyToVal.containsKey(key)) {
@@ -58,6 +43,21 @@ public class LFUCache {
         freToKey.get(1).add(key);
         minFre = 1;
 
+    }
+
+    private void increaseFre(int key) {
+        int oldFre = keyToFre.get(key);
+        keyToFre.put(key, oldFre + 1);
+        freToKey.get(oldFre).remove(key);
+        freToKey.putIfAbsent(oldFre + 1, new LinkedHashSet<Integer>());
+        freToKey.get(oldFre + 1).add(key);
+
+        if (freToKey.get(oldFre).isEmpty()) {
+            freToKey.remove(oldFre);
+            if (oldFre == this.minFre) {
+                minFre++;
+            }
+        }
     }
 
     public void removeMinFre() {
